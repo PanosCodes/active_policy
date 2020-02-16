@@ -1,5 +1,5 @@
 # ActivePolicy
-    Active policy is meant to be a way to authorize a request before hitting the controller.
+Active policy is meant to be a way to authorize a request before hitting the controller.
 
 ## Installation
 
