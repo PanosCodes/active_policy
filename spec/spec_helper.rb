@@ -1,5 +1,7 @@
 require "bundler/setup"
 require "active_policy"
+require "active_policy/active_policy_middleware"
+require "active_policy/utilities/utilities"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
