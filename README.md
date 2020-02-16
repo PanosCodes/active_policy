@@ -20,21 +20,15 @@ Or install it yourself as:
 
 ## Usage
 
-1. Register the ActivePolicyMiddleware inside application.rb
-
-        ...
-        config.middleware.use ActivePolicyMiddleware
-        ...
-
- 2. Inside your route.rb
+ 1. Inside your route.rb
     ```ruby
     post 'users/:user_id/segments', to: 'users#register_to_segment', policy: UserPolicy, policy_models: {user_id: User}
     ```
 
- 3. Create the user_policy.rb
+ 2. Create the user_policy.rb
 
     ```ruby
-    class UserPolicy < ActivePolicy
+    class UserPolicy < ActivePolicy::Base
         # @param [User] user
         #
         # @return [TrueClass, FalseClass]
