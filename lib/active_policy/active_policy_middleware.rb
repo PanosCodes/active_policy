@@ -10,14 +10,15 @@ class ActivePolicyMiddleware
 
   # @param [Hash] env
   def call(env)
+    request = ActionDispatch::Request.new(env)
     params = ActivePolicy::Utilities.route_params(
-        ActionDispatch::Request.new(env).path,
+        request.path,
         env[ENV_KEY_REQUEST_METHOD],
         Rails.application.routes
     )
 
     if params.key?(:policy)
-      policy = params[:policy].new current_user(env)
+      policy = params[:policy].new(current_user(env), request)
       method_name = params[:action] + '?'
       models = ActivePolicy::Utilities.models_from_route_params(params)
 
