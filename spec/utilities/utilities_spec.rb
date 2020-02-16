@@ -15,7 +15,7 @@ RSpec.describe ActivePolicy::Utilities do
       model = Class.new
       allow(model).to receive(:find).and_return(Class.new)
       result = ActivePolicy::Utilities
-          .models_from_route_params({user_id: model, segment_id: model})
+          .models_from_route_params({policy_models: {user_id: model, segment_id: model}})
 
       expect(result.length).to eq 2
     end
