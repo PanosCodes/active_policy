@@ -6,6 +6,7 @@ SimpleCov.formatter = SimpleCov::Formatter::Codecov
 
 require "bundler/setup"
 require "active_policy"
+require "active_policy/base"
 require "active_policy/active_policy_middleware"
 require "active_policy/utilities/utilities"
 
