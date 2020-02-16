@@ -6,17 +6,20 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Panos Dalitsouris"]
   spec.email         = ["hello@panos.codes"]
 
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = "Authorize a request before hitting the controller."
+  spec.description   = "Active policy is meant to be a way to authorize a request before hitting the controller."
+  spec.homepage      = "https://github.com/PanosCodes/active_policy"
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
 
   spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "TODO: Put your gem's public repo URL here."
-  spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
+  spec.metadata["source_code_uri"] = "https://github.com/PanosCodes/active_policy"
+  spec.metadata["changelog_uri"] = "https://github.com/PanosCodes/active_policy"
+
+  # Dependencies
+  spec.add_runtime_dependency 'rails', '~> 6.0'
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
