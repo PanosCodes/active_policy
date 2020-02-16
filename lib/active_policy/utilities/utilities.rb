@@ -12,10 +12,11 @@ module ActivePolicy
   # @param [Hash] params
   #
   # @return [Array<ActiveRecord>]
-  def self.models_from_route_params(policy_model_map)
+  def self.models_from_route_params(params)
     models = []
-    policy_model_map.each do |key, value|
-      models << value.find(policy_model_map[key])
+    raise 'policy_models is missing from route' if params[:policy_models].nil?
+    params[:policy_models].each do |key, value|
+      models << value.find(params[key])
     end
     models
   end
