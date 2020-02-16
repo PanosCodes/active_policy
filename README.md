@@ -38,6 +38,7 @@ Or install it yourself as:
         def register_to_segment?(user)
             return true if @current_user.is_admin?
             return true if user.is_staff?
+            false
         end
     end
     ```
