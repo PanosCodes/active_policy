@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/PanosCodes/active_policy.svg?branch=master)](https://travis-ci.org/PanosCodes/active_policy)
+[![codecov](https://codecov.io/gh/PanosCodes/active_policy/branch/master/graph/badge.svg)](https://codecov.io/gh/PanosCodes/active_policy)
 
 # ActivePolicy
 Active policy is meant to be a way to authorize a request before hitting the controller.
