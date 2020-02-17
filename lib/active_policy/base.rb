@@ -7,10 +7,5 @@ module ActivePolicy
       @request = request
       @params = params
     end
-
-    # @param [Rack::Response]
-    def response(status_code, headers = {'content_type': 'application/json'}, body = [])
-      Rack::Response.new(body, status_code, headers)
-    end
   end
 end
