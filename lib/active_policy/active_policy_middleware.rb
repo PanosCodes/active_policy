@@ -18,14 +18,20 @@ class ActivePolicyMiddleware
     )
 
     if params.key?(:policy)
-      policy = params[:policy].new(current_user(env), request)
+      # @type [ActivePolicy::Base] policy
+      policy = params[:policy].new(current_user(env), request, params)
       method_name = params[:action] + '?'
       models = ActivePolicy::Utilities.models_from_route_params(params)
+      response = policy.send(method_name, *models)
 
-      policy.send(method_name, *models)
+      if (response.is_a?(Rack::Response))
+        response.finish
+      else
+        @app.call(env)
+      end
+    else
+      @app.call(env)
     end
-
-    @app.call(env)
   end
 
   private
