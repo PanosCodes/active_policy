@@ -18,14 +18,21 @@ class ActivePolicyMiddleware
     )
 
     if params.key?(:policy)
-      policy = params[:policy].new(current_user(env), request)
+      # @type [ActivePolicy::Base] policy
+      policy = params[:policy].new(current_user(env), request, params)
       method_name = params[:action] + '?'
       models = ActivePolicy::Utilities.models_from_route_params(params)
+      result = policy.send(method_name, *models)
 
-      policy.send(method_name, *models)
+      if result
+        @app.call(env)
+      else
+        response = response()
+        response.finish
+      end
+    else
+      @app.call(env)
     end
-
-    @app.call(env)
   end
 
   private
@@ -39,5 +46,10 @@ class ActivePolicyMiddleware
     end
 
     nil
+  end
+
+  # @param [Rack::Response]
+  def response(status_code = 401, headers = {'content_type': 'application/json'}, body = [])
+    Rack::Response.new(body, status_code, headers)
   end
 end

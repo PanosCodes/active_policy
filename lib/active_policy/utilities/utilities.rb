@@ -15,6 +15,7 @@ module ActivePolicy
   def self.models_from_route_params(params)
     models = []
     raise 'policy_models is missing from route' if params[:policy_models].nil?
+    return [] if params[:policy_models].empty?
     params[:policy_models].each do |key, value|
       models << value.find(params[key])
     end
