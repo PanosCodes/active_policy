@@ -14,7 +14,7 @@ module ActivePolicy
   # @return [Array<ActiveRecord>]
   def self.models_from_route_params(params)
     models = []
-    if params.key?('policy_models')
+    if params.key?(:policy_models)
       params[:policy_models].each do |key, value|
         models << value.find(params[key])
       end
