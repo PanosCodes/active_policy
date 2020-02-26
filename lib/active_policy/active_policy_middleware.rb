@@ -37,8 +37,22 @@ class ActivePolicyMiddleware
 
   private
 
+
+  # @param [Hash] params
+  # @return [String]
+  def policy_name(params)
+    if params[:policy].is_a?(Class)
+      return params[:policy]
+    end
+
+    if params[:policy].key?(:class)
+      return params[:policy][:class]
+    end
+
+    params[:policy]
+  end
+
   # @param [Hash] env
-  #
   # @return [User, nil]
   def current_user(env)
     if env.key?(ENV_KEY_WARDEN)
