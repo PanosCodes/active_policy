@@ -51,5 +51,10 @@ class ActivePolicyMiddleware
   # @param [Rack::Response]
   def response(status_code = 401, headers = {'content_type': 'application/json'}, body = [])
     Rack::Response.new(body, status_code, headers)
+
+  # @param [Hash] params
+  # @return [TrueClass, FalseClass]
+  def run_middleware?(params)
+    params.key?(:policy)
   end
 end

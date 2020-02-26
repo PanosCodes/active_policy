@@ -1,8 +1,8 @@
 module ActivePolicy
   class Utilities
-  # @param [ActionDispatch::Routing::RouteSet] route_set
   # @param [String] path
   # @param [String] method
+  # @param [ActionDispatch::Routing::RouteSet] route_set
   #
   # @return [Hash]
   def self.route_params(path, method, route_set)
