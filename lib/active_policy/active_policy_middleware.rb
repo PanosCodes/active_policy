@@ -3,7 +3,6 @@ class ActivePolicyMiddleware
   ENV_KEY_REQUEST_METHOD = 'REQUEST_METHOD'
   ENV_KEY_WARDEN = 'warden'
 
-  # @param [Class] app
   def initialize(app)
     @app = app
   end
@@ -17,22 +16,19 @@ class ActivePolicyMiddleware
         Rails.application.routes
     )
 
-    if params.key?(:policy)
-      # @type [ActivePolicy::Base] policy
-      policy = params[:policy].new(current_user(env), request, params)
-      method_name = params[:action] + '?'
-      models = ActivePolicy::Utilities.models_from_route_params(params)
-      result = policy.send(method_name, *models)
+    return next_middleware(env) unless run_middleware?(params)
 
-      if result
-        @app.call(env)
-      else
-        response = response()
-        response.finish
-      end
-    else
-      @app.call(env)
-    end
+    method_name = method_name_from_params(params)
+    models = ActivePolicy::Utilities.models_from_route_params(params)
+    policy = policy_name(params).new(current_user(env), request, params)
+
+    return next_middleware(env) unless policy.respond_to?(method_name)
+
+    result = policy.send(method_name, *models)
+
+    return next_middleware(env) if result
+
+    response
   end
 
   private
