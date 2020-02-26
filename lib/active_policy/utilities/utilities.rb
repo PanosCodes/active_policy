@@ -1,8 +1,8 @@
 module ActivePolicy
   class Utilities
-  # @param [ActionDispatch::Routing::RouteSet] route_set
   # @param [String] path
   # @param [String] method
+  # @param [ActionDispatch::Routing::RouteSet] route_set
   #
   # @return [Hash]
   def self.route_params(path, method, route_set)
@@ -14,10 +14,10 @@ module ActivePolicy
   # @return [Array<ActiveRecord>]
   def self.models_from_route_params(params)
     models = []
-    raise 'policy_models is missing from route' if params[:policy_models].nil?
-    return [] if params[:policy_models].empty?
-    params[:policy_models].each do |key, value|
-      models << value.find(params[key])
+    if params.key?(:policy_models)
+      params[:policy_models].each do |key, value|
+        models << value.find(params[key])
+      end
     end
     models
   end
