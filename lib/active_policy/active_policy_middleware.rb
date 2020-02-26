@@ -37,6 +37,13 @@ class ActivePolicyMiddleware
 
   private
 
+  # @param [Hash] params
+  # @return [String]
+  def method_name_from_params(params)
+    return params[:method] if params.key(:method)
+
+    params[:action] + '?'
+  end
 
   # @param [Hash] params
   # @return [String]
